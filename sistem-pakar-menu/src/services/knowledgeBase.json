@@ -1,0 +1,491 @@
+{
+  "metadata": {
+    "title": "Sistem Pakar Menentukan Menu Makanan Sehat Berdasarkan Penyakit",
+    "authors": "Abdul Halim Hasugian, Raissa Amanda Putri, M. Fahwir Rizal Siregar",
+    "source": "Techno Xplore Vol. 10 No. 1, April 2025",
+    "doi": "10.36805/technoxplore.v10i1.8316",
+    "methods": ["Forward Chaining", "Certainty Factor"],
+    "implementation_by": "Tim Mahasiswa",
+    "implementation_date": "2025-10-27"
+  },
+  
+  "diseases": [
+    {
+      "id": "P1",
+      "name": "Jantung",
+      "description": "Penyakit kardiovaskular yang memerlukan diet rendah lemak jenuh dan kolesterol",
+      "cf_base": 1.0
+    },
+    {
+      "id": "P2",
+      "name": "Kolesterol",
+      "description": "Kolesterol tinggi yang memerlukan pengaturan asupan lemak",
+      "cf_base": 1.0
+    },
+    {
+      "id": "P3",
+      "name": "Diabetes Melitus",
+      "description": "Penyakit metabolik yang memerlukan kontrol gula darah dan karbohidrat",
+      "cf_base": 1.0
+    },
+    {
+      "id": "P4",
+      "name": "Asam Urat",
+      "description": "Gangguan metabolisme purin yang memerlukan diet rendah purin",
+      "cf_base": 1.0
+    }
+  ],
+  
+  "nutritional_needs": [
+    {
+      "id": "N1",
+      "code": "rendah_lemak_jenuh",
+      "name": "Rendah Lemak Jenuh",
+      "description": "Diet rendah lemak jenuh untuk kesehatan jantung"
+    },
+    {
+      "id": "N2",
+      "code": "rendah_kolesterol",
+      "name": "Rendah Kolesterol",
+      "description": "Diet rendah kolesterol untuk mencegah penumpukan plak"
+    },
+    {
+      "id": "N3",
+      "code": "rendah_gula",
+      "name": "Rendah Gula",
+      "description": "Diet rendah gula dan kontrol karbohidrat untuk diabetes"
+    },
+    {
+      "id": "N4",
+      "code": "rendah_purin",
+      "name": "Rendah Purin",
+      "description": "Diet rendah purin untuk mencegah kristalisasi asam urat"
+    },
+    {
+      "id": "N5",
+      "code": "tinggi_serat",
+      "name": "Tinggi Serat",
+      "description": "Diet tinggi serat untuk kesehatan pencernaan dan metabolisme"
+    },
+    {
+      "id": "N6",
+      "code": "rendah_natrium",
+      "name": "Rendah Natrium",
+      "description": "Diet rendah garam untuk kontrol tekanan darah"
+    }
+  ],
+  
+  "disease_nutrition_rules": [
+    {
+      "id": "R1",
+      "if": ["P1"],
+      "then": "rendah_lemak_jenuh",
+      "cf": 0.90,
+      "description": "Penyakit jantung sangat memerlukan diet rendah lemak jenuh",
+      "note": "Rule sekuensial level 1: Disease -> Nutritional Need"
+    },
+    {
+      "id": "R2",
+      "if": ["P1"],
+      "then": "rendah_kolesterol",
+      "cf": 0.85,
+      "description": "Penyakit jantung memerlukan diet rendah kolesterol",
+      "note": "Rule sekuensial level 1: Disease -> Nutritional Need"
+    },
+    {
+      "id": "R3",
+      "if": ["P1"],
+      "then": "rendah_natrium",
+      "cf": 0.80,
+      "description": "Penyakit jantung memerlukan diet rendah natrium",
+      "note": "Rule sekuensial level 1: Disease -> Nutritional Need"
+    },
+    {
+      "id": "R4",
+      "if": ["P2"],
+      "then": "rendah_kolesterol",
+      "cf": 0.90,
+      "description": "Kolesterol tinggi sangat memerlukan diet rendah kolesterol",
+      "note": "Rule sekuensial level 1: Disease -> Nutritional Need"
+    },
+    {
+      "id": "R5",
+      "if": ["P2"],
+      "then": "rendah_lemak_jenuh",
+      "cf": 0.85,
+      "description": "Kolesterol tinggi memerlukan diet rendah lemak jenuh",
+      "note": "Rule sekuensial level 1: Disease -> Nutritional Need"
+    },
+    {
+      "id": "R6",
+      "if": ["P2"],
+      "then": "tinggi_serat",
+      "cf": 0.75,
+      "description": "Kolesterol tinggi memerlukan diet tinggi serat",
+      "note": "Rule sekuensial level 1: Disease -> Nutritional Need"
+    },
+    {
+      "id": "R7",
+      "if": ["P3"],
+      "then": "rendah_gula",
+      "cf": 0.95,
+      "description": "Diabetes sangat memerlukan diet rendah gula",
+      "note": "Rule sekuensial level 1: Disease -> Nutritional Need"
+    },
+    {
+      "id": "R8",
+      "if": ["P3"],
+      "then": "tinggi_serat",
+      "cf": 0.80,
+      "description": "Diabetes memerlukan diet tinggi serat untuk kontrol gula darah",
+      "note": "Rule sekuensial level 1: Disease -> Nutritional Need"
+    },
+    {
+      "id": "R9",
+      "if": ["P4"],
+      "then": "rendah_purin",
+      "cf": 0.90,
+      "description": "Asam urat sangat memerlukan diet rendah purin",
+      "note": "Rule sekuensial level 1: Disease -> Nutritional Need"
+    },
+    {
+      "id": "R10",
+      "if": ["P4"],
+      "then": "tinggi_serat",
+      "cf": 0.70,
+      "description": "Asam urat memerlukan diet tinggi serat",
+      "note": "Rule sekuensial level 1: Disease -> Nutritional Need"
+    }
+  ],
+  
+  "nutrition_food_rules": [
+    {
+      "id": "RF1",
+      "if": ["rendah_lemak_jenuh"],
+      "then": "M3",
+      "food_name": "Nasi Putih",
+      "category": "Makanan Pokok",
+      "cf": 0.80,
+      "mb": 0.80,
+      "md": 0.10,
+      "reasoning": "Nasi putih rendah lemak jenuh, cocok untuk jantung",
+      "note": "Rule sekuensial level 2: Nutritional Need -> Food"
+    },
+    {
+      "id": "RF2",
+      "if": ["rendah_kolesterol"],
+      "then": "M3",
+      "food_name": "Nasi Putih",
+      "category": "Makanan Pokok",
+      "cf": 0.75,
+      "mb": 0.75,
+      "md": 0.15,
+      "reasoning": "Nasi putih tidak mengandung kolesterol",
+      "note": "Rule paralel: makanan sama, kebutuhan nutrisi berbeda"
+    },
+    {
+      "id": "RF3",
+      "if": ["rendah_gula"],
+      "then": "M2",
+      "food_name": "Kentang Rebus",
+      "category": "Makanan Pokok",
+      "cf": 0.70,
+      "mb": 0.70,
+      "md": 0.20,
+      "reasoning": "Kentang rebus memiliki indeks glikemik lebih rendah dari nasi",
+      "note": "Rule sekuensial level 2"
+    },
+    {
+      "id": "RF4",
+      "if": ["rendah_lemak_jenuh"],
+      "then": "M6",
+      "food_name": "Roti",
+      "category": "Makanan Pokok",
+      "cf": 0.75,
+      "mb": 0.80,
+      "md": 0.15,
+      "reasoning": "Roti gandum rendah lemak jenuh",
+      "note": "Rule sekuensial level 2"
+    },
+    {
+      "id": "RF5",
+      "if": ["rendah_gula"],
+      "then": "M5",
+      "food_name": "Bubur",
+      "category": "Makanan Pokok",
+      "cf": 0.70,
+      "mb": 0.80,
+      "md": 0.20,
+      "reasoning": "Bubur mudah dicerna dan dapat dikontrol porsinya",
+      "note": "Rule sekuensial level 2"
+    },
+    {
+      "id": "RF6",
+      "if": ["rendah_lemak_jenuh"],
+      "then": "M9",
+      "food_name": "Ayam Goreng",
+      "category": "Lauk Pauk",
+      "cf": 0.80,
+      "mb": 0.80,
+      "md": 0.10,
+      "reasoning": "Ayam tanpa kulit rendah lemak jenuh",
+      "note": "Rule sekuensial level 2"
+    },
+    {
+      "id": "RF7",
+      "if": ["rendah_kolesterol"],
+      "then": "M9",
+      "food_name": "Ayam Goreng",
+      "category": "Lauk Pauk",
+      "cf": 0.70,
+      "mb": 0.70,
+      "md": 0.20,
+      "reasoning": "Ayam rendah kolesterol jika tanpa kulit",
+      "note": "Rule paralel: makanan sama dengan RF6"
+    },
+    {
+      "id": "RF8",
+      "if": ["rendah_lemak_jenuh"],
+      "then": "M16",
+      "food_name": "Ikan Kembung Goreng",
+      "category": "Lauk Pauk",
+      "cf": 0.85,
+      "mb": 0.85,
+      "md": 0.10,
+      "reasoning": "Ikan kembung kaya omega-3 baik untuk jantung",
+      "note": "Rule sekuensial level 2"
+    },
+    {
+      "id": "RF9",
+      "if": ["rendah_kolesterol"],
+      "then": "M16",
+      "food_name": "Ikan Kembung Goreng",
+      "category": "Lauk Pauk",
+      "cf": 0.80,
+      "mb": 0.80,
+      "md": 0.15,
+      "reasoning": "Ikan kembung membantu menurunkan kolesterol",
+      "note": "Rule paralel: makanan sama dengan RF8"
+    },
+    {
+      "id": "RF10",
+      "if": ["rendah_lemak_jenuh"],
+      "then": "M20",
+      "food_name": "Ikan Tuna Goreng",
+      "category": "Lauk Pauk",
+      "cf": 0.85,
+      "mb": 0.85,
+      "md": 0.10,
+      "reasoning": "Ikan tuna kaya omega-3 dan protein tinggi",
+      "note": "Rule sekuensial level 2"
+    },
+    {
+      "id": "RF11",
+      "if": ["rendah_gula"],
+      "then": "M23",
+      "food_name": "Telur Dadar",
+      "category": "Lauk Pauk",
+      "cf": 0.65,
+      "mb": 0.70,
+      "md": 0.25,
+      "reasoning": "Telur dalam porsi terbatas untuk diabetes (max 1 butir/hari)",
+      "note": "Rule sekuensial level 2"
+    },
+    {
+      "id": "RF12",
+      "if": ["rendah_purin"],
+      "then": "M28",
+      "food_name": "Sambal Goreng Tempe",
+      "category": "Lauk Pauk",
+      "cf": 0.85,
+      "mb": 0.85,
+      "md": 0.10,
+      "reasoning": "Tempe rendah purin, sumber protein nabati yang baik",
+      "note": "Rule sekuensial level 2"
+    },
+    {
+      "id": "RF13",
+      "if": ["rendah_lemak_jenuh"],
+      "then": "M27",
+      "food_name": "Daging Sapi Sop",
+      "category": "Lauk Pauk",
+      "cf": 0.70,
+      "mb": 0.80,
+      "md": 0.20,
+      "reasoning": "Sop daging sapi rendah lemak jika dipilih bagian has dalam",
+      "note": "Rule sekuensial level 2"
+    },
+    {
+      "id": "RF14",
+      "if": ["rendah_lemak_jenuh"],
+      "then": "M32",
+      "food_name": "Bening Bayam Hijau",
+      "category": "Sayuran",
+      "cf": 0.80,
+      "mb": 0.80,
+      "md": 0.10,
+      "reasoning": "Bayam hijau rendah lemak, tinggi nutrisi",
+      "note": "Rule sekuensial level 2"
+    },
+    {
+      "id": "RF15",
+      "if": ["tinggi_serat"],
+      "then": "M32",
+      "food_name": "Bening Bayam Hijau",
+      "category": "Sayuran",
+      "cf": 0.85,
+      "mb": 0.85,
+      "md": 0.10,
+      "reasoning": "Bayam tinggi serat untuk pencernaan",
+      "note": "Rule paralel: makanan sama dengan RF14"
+    },
+    {
+      "id": "RF16",
+      "if": ["rendah_gula"],
+      "then": "M32",
+      "food_name": "Bening Bayam Hijau",
+      "category": "Sayuran",
+      "cf": 0.75,
+      "mb": 0.75,
+      "md": 0.15,
+      "reasoning": "Bayam rendah kalori untuk diabetes",
+      "note": "Rule paralel: makanan sama dengan RF14, RF15"
+    },
+    {
+      "id": "RF17",
+      "if": ["tinggi_serat"],
+      "then": "M33",
+      "food_name": "Sayur Asam",
+      "category": "Sayuran",
+      "cf": 0.80,
+      "mb": 0.80,
+      "md": 0.15,
+      "reasoning": "Sayur asam tinggi serat dari berbagai sayuran",
+      "note": "Rule sekuensial level 2"
+    },
+    {
+      "id": "RF18",
+      "if": ["rendah_natrium"],
+      "then": "M33",
+      "food_name": "Sayur Asam",
+      "category": "Sayuran",
+      "cf": 0.70,
+      "mb": 0.70,
+      "md": 0.20,
+      "reasoning": "Sayur asam dapat dibuat rendah garam",
+      "note": "Rule paralel: makanan sama dengan RF17"
+    },
+    {
+      "id": "RF19",
+      "if": ["tinggi_serat"],
+      "then": "M35",
+      "food_name": "Tumis Buncis",
+      "category": "Sayuran",
+      "cf": 0.80,
+      "mb": 0.80,
+      "md": 0.15,
+      "reasoning": "Buncis tinggi serat dan vitamin",
+      "note": "Rule sekuensial level 2"
+    },
+    {
+      "id": "RF20",
+      "if": ["tinggi_serat"],
+      "then": "M36",
+      "food_name": "Tumis Kangkung",
+      "category": "Sayuran",
+      "cf": 0.85,
+      "mb": 0.85,
+      "md": 0.10,
+      "reasoning": "Kangkung tinggi serat dan nutrisi",
+      "note": "Rule sekuensial level 2"
+    },
+    {
+      "id": "RF21",
+      "if": ["rendah_gula"],
+      "then": "M44",
+      "food_name": "Apel",
+      "category": "Buah",
+      "cf": 0.85,
+      "mb": 0.85,
+      "md": 0.10,
+      "reasoning": "Apel rendah gula, tinggi serat untuk diabetes",
+      "note": "Rule sekuensial level 2"
+    },
+    {
+      "id": "RF22",
+      "if": ["tinggi_serat"],
+      "then": "M44",
+      "food_name": "Apel",
+      "category": "Buah",
+      "cf": 0.85,
+      "mb": 0.85,
+      "md": 0.10,
+      "reasoning": "Apel tinggi serat dan antioksidan",
+      "note": "Rule paralel: makanan sama dengan RF21"
+    },
+    {
+      "id": "RF23",
+      "if": ["rendah_kolesterol"],
+      "then": "M44",
+      "food_name": "Apel",
+      "category": "Buah",
+      "cf": 0.75,
+      "mb": 0.75,
+      "md": 0.15,
+      "reasoning": "Apel membantu menurunkan kolesterol",
+      "note": "Rule paralel: makanan sama dengan RF21, RF22"
+    },
+    {
+      "id": "RF24",
+      "if": ["rendah_gula"],
+      "then": "M57",
+      "food_name": "Semangka",
+      "category": "Buah",
+      "cf": 0.70,
+      "mb": 0.70,
+      "md": 0.20,
+      "reasoning": "Semangka dalam porsi terbatas untuk diabetes (1 potong kecil)",
+      "note": "Rule sekuensial level 2"
+    },
+    {
+      "id": "RF25",
+      "if": ["tinggi_serat"],
+      "then": "M50",
+      "food_name": "Mangga",
+      "category": "Buah",
+      "cf": 0.75,
+      "mb": 0.75,
+      "md": 0.20,
+      "reasoning": "Mangga tinggi serat dan vitamin C",
+      "note": "Rule sekuensial level 2"
+    }
+  ],
+  
+  "user_preferences": [
+    {
+      "id": 1,
+      "label": "Tidak Mau Makan",
+      "value": 0.2
+    },
+    {
+      "id": 2,
+      "label": "Tidak Terlalu Yakin Mau Makan",
+      "value": 0.4
+    },
+    {
+      "id": 3,
+      "label": "Netral",
+      "value": 0.6
+    },
+    {
+      "id": 4,
+      "label": "Cukup Yakin Mau Makan",
+      "value": 0.8
+    },
+    {
+      "id": 5,
+      "label": "Sangat Yakin Mau Makan",
+      "value": 1.0
+    }
+  ]
+}

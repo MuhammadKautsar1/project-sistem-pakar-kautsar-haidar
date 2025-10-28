@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sistem Pakar Menu Makanan Sehat</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <h1>Sistem Pakar Menu Makanan Sehat</h1>
+      <p class="subtitle">
+        Metode Certainty Factor & Forward Chaining — Berdasarkan Jurnal TechnoXplore
+      </p>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- STEP 1 -->
+    <section class="card" id="step1">
+      <h2>1. Data Pengguna</h2>
+      <div class="form-row">
+        <label>Nama</label>
+        <input id="nama" type="text" placeholder="Masukkan nama..." />
+      </div>
+      <div class="form-row">
+        <label>Penyakit</label>
+        <select id="penyakit">
+          <option value="jantung">Jantung</option>
+          <option value="kolesterol">Kolesterol</option>
+          <option value="diabetes">Diabetes Melitus</option>
+          <option value="asam_urat">Asam Urat</option>
+        </select>
+      </div>
+      <div class="actions">
+        <button id="btn-to-step2" class="btn primary">
+          Lanjutkan → Pemilihan Menu
+        </button>
+      </div>
+    </section>
+
+    <!-- STEP 2 -->
+    <section class="card hidden" id="step2">
+      <h2>2. Pilih Nilai Kondisi Makanan</h2>
+      <p>Pilih nilai kondisi untuk tiap makanan (sesuai Tabel Kondisi di jurnal).</p>
+
+      <div id="food-table-wrap"></div>
+
+      <div class="actions">
+        <button id="btn-back-step1" class="btn">← Kembali</button>
+        <button id="btn-process" class="btn primary">Proses Inferensi →</button>
+      </div>
+    </section>
+
+    <!-- STEP 3 -->
+    <section class="card hidden" id="step3">
+      <h2>3. Hasil Rekomendasi</h2>
+      <p id="user-info" class="info"></p>
+      <div id="results-wrap"></div>
+
+      <div class="actions">
+        <button id="btn-back-step2" class="btn">← Pilih Ulang</button>
+        <button id="btn-new" class="btn primary">Mulai Lagi</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <small>
+        © 2025 Sistem Pakar Menu Makanan Sehat — Berdasarkan Jurnal TechnoXplore
+      </small>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
