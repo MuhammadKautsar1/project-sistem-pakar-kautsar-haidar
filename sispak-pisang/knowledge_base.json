@@ -1,0 +1,24 @@
+{
+  "data_diagnosa_pisang": {
+    "gejala": [
+      {"kode": "G01", "nama": "Daun berwarna kuning"},
+      {"kode": "G02", "nama": "Daun terdapat bercak hitam"},
+      {"kode": "G03", "nama": "Daun mengering dari tepi"},
+      {"kode": "G04", "nama": "Batang semu membusuk"},
+      {"kode": "G05", "nama": "Buah busuk dan berjamur"},
+      {"kode": "G06", "nama": "Pertumbuhan tanaman terhambat"},
+      {"kode": "G07", "nama": "Daun muda menggulung"},
+      {"kode": "G08", "nama": "Terdapat kutu di bawah daun"}
+    ],
+    "penyakit": [
+      {"kode": "P01", "nama": "Penyakit Sigatoka", "solusi": "Gunakan fungisida berbahan aktif mancozeb atau propikonazol dan pangkas daun terinfeksi."},
+      {"kode": "P02", "nama": "Penyakit Layu Fusarium", "solusi": "Cabut tanaman sakit dan lakukan rotasi tanaman. Gunakan bibit tahan penyakit."},
+      {"kode": "P03", "nama": "Serangan Kutu Daun", "solusi": "Gunakan insektisida alami (neem) atau sistemik jika parah."}
+    ],
+    "aturan": [
+      {"rule_id": "R1", "kode_penyakit": "P01", "cf_pakar": 0.8, "gejala": ["G01", "G02", "G03"]},
+      {"rule_id": "R2", "kode_penyakit": "P02", "cf_pakar": 0.9, "gejala": ["G04", "G06"]},
+      {"rule_id": "R3", "kode_penyakit": "P03", "cf_pakar": 0.85, "gejala": ["G07", "G08"]}
+    ]
+  }
+}

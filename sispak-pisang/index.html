@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistem Pakar Diagnosa Hama & Penyakit Pisang</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #FFFBE6;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background-color: #FFEB3B;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      border-bottom: 4px solid #4CAF50;
+    }
+    header img {
+      width: 50px;
+      margin-right: 10px;
+    }
+    header h1 {
+      color: #2E7D32;
+      margin: 0;
+    }
+    main {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    form {
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 1rem 1.5rem;
+      border: 2px solid #E0E0E0;
+    }
+    .gejala {
+      background-color: #FAFAFA;
+      border: 1px solid #E0E0E0;
+      border-radius: 8px;
+      padding: 0.6rem 1rem;
+      margin: 0.4rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .gejala label {
+      flex: 1;
+    }
+    .gejala input[type="number"] {
+      width: 60px;
+      text-align: center;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    button:hover {
+      background-color: #43A047;
+    }
+    #hasil {
+      background-color: #FFF59D;
+      border-radius: 10px;
+      margin-top: 1.5rem;
+      padding: 1rem;
+      display: none;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      color: #666;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://e7.pngegg.com/pngimages/455/926/png-clipart-banana-product-design-logo-banana-food-text.png" alt="Banana Logo">
+    <h1>Sistem Pakar Diagnosa Hama & Penyakit Pisang</h1>
+  </header>
+
+  <main>
+    <h2>Form Diagnosa</h2>
+
+    <form id="formDiagnosa" onsubmit="event.preventDefault(); diagnosa();">
+      <div id="daftar-gejala">Memuat gejala</div>
+      <button type="submit">Diagnosa</button>
+    </form>
+
+    <div id="hasil">
+      <h2>Hasil Diagnosis</h2>
+      <div id="isi-hasil"></div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 Sistem Pakar Pisang | oleh haidar dan kautsar
+  </footer>
+
+  <script src="inference_engine.js"></script>
+</body>
+</html>
